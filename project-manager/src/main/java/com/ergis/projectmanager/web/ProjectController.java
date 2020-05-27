@@ -1,6 +1,7 @@
 package com.ergis.projectmanager.web;
 
 import com.ergis.projectmanager.domain.Project;
+import com.ergis.projectmanager.services.MapValidationErrorService;
 import com.ergis.projectmanager.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,20 +24,14 @@ public class ProjectController {
 
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private MapValidationErrorService mapValidationErrorService;
 
     @PostMapping("")
     public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result) {
 
-        if(result.hasErrors()) {
-
-            Map<String, String> errorMap = new HashMap<>();
-
-            for(FieldError error: result.getFieldErrors()) {
-                errorMap.put(error.getField(), error.getDefaultMessage());
-            }
-
-            return new ResponseEntity<Map<String, String>>(errorMap, HttpStatus.BAD_REQUEST);
-        }
+        ResponseEntity<?> errors = mapValidationErrorService.MapValidationError(result);
+        if(errors != null) return errors;
 
         Project project1 = projectService.saveOrUpdate(project);
         return new ResponseEntity<Project>(project1, HttpStatus.CREATED);
