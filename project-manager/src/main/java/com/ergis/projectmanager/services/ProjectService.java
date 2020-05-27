@@ -20,4 +20,14 @@ public class ProjectService {
             throw new ProjectCodeException("Project with code '" + project.getCode().toUpperCase() + "' already exists");
         }
     }
+
+    public Project findByCode(String code) {
+
+        Project project = projectRepository.findByCode(code.toUpperCase());
+
+        if(project == null)
+            throw new ProjectCodeException("Project with code '" + code.toUpperCase() + "' doesn't exist");
+
+        return projectRepository.findByCode(code.toUpperCase());
+    }
 }
