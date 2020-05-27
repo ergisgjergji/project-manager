@@ -34,4 +34,11 @@ public class ProjectService {
     public Iterable<Project> findAll() {
         return projectRepository.findAll();
     }
+
+    public void deleteByCode(String code) {
+
+        Project project = projectRepository.findByCode(code.toUpperCase());
+        if(project == null) throw new ProjectCodeException("Project with code '" + code.toUpperCase() + "' doesn't exist");
+        projectRepository.delete(project);
+    }
 }
