@@ -1,4 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createProject } from './../../redux/actions/projectActions';
 
 class AddProject extends Component {
 
@@ -23,8 +26,8 @@ class AddProject extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-
         const project = { ...this.state };
+        this.props.createProject(project, this.props.history);
     }
 
     render() {
@@ -112,4 +115,8 @@ class AddProject extends Component {
     }
 }
 
-export default AddProject;
+AddProject.propTypes = {
+    createProject: PropTypes.func.isRequired
+}
+
+export default connect(null, { createProject })(AddProject);
