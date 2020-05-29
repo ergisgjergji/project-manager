@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { GET_ERRORS, GET_PROJECTS, GET_PROJECT } from './types';
 
-export const createProject = (project, history) => dispatch => {
+export const createOrUpdateProject = (project, history) => dispatch => {
 
     axios.post("http://localhost:8080/api/project", project)
         .then(res => history.push("/dashboard"))
