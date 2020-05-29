@@ -1,0 +1,12 @@
+.react-confirm-alert-body {
+    text-align: center !important;
+}
+.react-confirm-alert-button-group {
+    justify-content: center !important;
+}
+.confirm-yes {
+    background: #008000d9 !important;
+}
+.confirm-no {
+    background: #dc3545 !important;
+}

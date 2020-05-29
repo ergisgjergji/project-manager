@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
+
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { deleteProject } from './../../redux/actions/projectActions';
@@ -7,7 +11,22 @@ import { deleteProject } from './../../redux/actions/projectActions';
 class ProjectItem extends Component {
 
 	onDeleteClick = (code) => {
-		this.props.deleteProject(code);
+
+		confirmAlert({
+			title: 'Confirm',
+			message: 'Are u sure u want to delete this project?',
+			buttons: [
+				{
+					label: 'Yes',
+					className: "confirm-yes",
+					onClick: () => this.props.deleteProject(code)
+				},
+				{
+					label: 'No',
+					className: "confirm-no"
+			  	}
+			]
+		})
 	}
 
 	render() {
