@@ -1,10 +1,14 @@
 import axios from 'axios';
 import { GET_ERRORS, GET_PROJECTS, GET_PROJECT } from './types';
+import { clearErrors } from './errorActions';
 
 export const createOrUpdateProject = (project, history) => dispatch => {
 
     axios.post("http://localhost:8080/api/project", project)
-        .then(res => history.push("/dashboard"))
+        .then(res => {
+            history.push("/dashboard");
+            dispatch(clearErrors());
+        })
         .catch(err => dispatch({
             type: GET_ERRORS,
             payload: err.response.data
