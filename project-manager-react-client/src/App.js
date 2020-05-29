@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './css/App.css';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import './css/react-confirm-alert.css';
 
 import Dashboard from './components/Dashboard';
