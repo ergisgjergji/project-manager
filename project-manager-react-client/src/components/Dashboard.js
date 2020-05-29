@@ -10,6 +10,7 @@ class Dashboard extends Component {
 
 	componentDidMount() {
 		this.props.getProjects();
+		console.log("mount");
 	}
 
 	render() {
