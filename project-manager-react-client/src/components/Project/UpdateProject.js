@@ -1,8 +1,21 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getProject } from './../../redux/actions/projectActions';
+
+import classnames from 'classnames';
 
 class UpdateProject extends Component {
 
+    componentDidMount() {
+        const { code } = this.props.match.params;
+        this.props.getProject(code, this.props.history);
+    }
+
     render() {
+
+        const project = this.props.projectReducer.currentProject;
+
         return (
             <div className="project">
                 <div className="container">
@@ -49,6 +62,15 @@ class UpdateProject extends Component {
             </div>
         )
     }
-}
+};
 
-export default UpdateProject;
+UpdateProject.propTypes = {
+    projectReducer: PropTypes.object.isRequired,
+    getProject: PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state) => ({
+    projectReducer: state.projectReducer
+});
+
+export default connect(mapStateToProps, { getProject })(UpdateProject);
