@@ -13,24 +13,30 @@ class AddProject extends Component {
             code: "",
             description: "",
             start_date: "",
-            end_date: ""
+            end_date: "",
+            errors: {}
         };
-
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+    }
+    
+    componentWillReceiveProps (nextProps) {
+        if( this.state.errors != nextProps.errors)
+            this.setState({ errors: nextProps.errors });
     }
 
-    onChange = (e) => {
+    onChange = e => {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    onSubmit = (e) => {
+    onSubmit = e => {
         e.preventDefault();
         const project = { ...this.state };
         this.props.createProject(project, this.props.history);
     }
 
     render() {
+
+        const { name, code, description, start_date, end_date } = this.state;
+
         return (
             <div>
                 <div className="project">
@@ -45,12 +51,12 @@ class AddProject extends Component {
                                     <div className="form-row">
 
                                         <div className="form-group col-md-12">
-                                            <label for="name">Project Name</label>
+                                            {/* <label for="name">Project Name</label> */}
                                             <input
                                             type="text"
                                             className="form-control form-control-md "
                                             name="name" id="name"
-                                            value={this.state.name}
+                                            value={name}
                                             onChange={this.onChange}
                                             />
                                         </div>
@@ -61,7 +67,7 @@ class AddProject extends Component {
                                             type="text"
                                             className="form-control form-control-md"
                                             name="code" id="code"
-                                            value={this.state.code}
+                                            value={code}
                                             onChange={this.onChange}
                                             />
                                         </div>
@@ -71,7 +77,7 @@ class AddProject extends Component {
                                             <textarea
                                             className="form-control form-control-md"
                                             name="description" id="description"
-                                            value={this.state.description}
+                                            value={description}
                                             onChange={this.onChange}
                                             />
                                         </div>
@@ -82,7 +88,7 @@ class AddProject extends Component {
                                             type="date"
                                             className="form-control form-control-md"
                                             name="start_date" id="start_date"
-                                            value={this.state.start_date}
+                                            value={start_date}
                                             onChange={this.onChange}
                                             />
                                         </div>
@@ -93,7 +99,7 @@ class AddProject extends Component {
                                             type="date"
                                             className="form-control form-control-md"
                                             name="end_date" id="end_date"
-                                            value={this.state.end_date}
+                                            value={end_date}
                                             onChange={this.onChange}
                                             />
                                         </div>
@@ -116,7 +122,12 @@ class AddProject extends Component {
 }
 
 AddProject.propTypes = {
+    errors: PropTypes.object.isRequired,
     createProject: PropTypes.func.isRequired
-}
+};
 
-export default connect(null, { createProject })(AddProject);
+const mapStateToProps = state => ({
+    errors: state.errors
+});
+
+export default connect(mapStateToProps, { createProject })(AddProject);
