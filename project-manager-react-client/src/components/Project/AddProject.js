@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createProject } from './../../redux/actions/projectActions';
 
+import classnames from 'classnames';
+
 class AddProject extends Component {
 
     constructor() {
@@ -35,7 +37,7 @@ class AddProject extends Component {
 
     render() {
 
-        const { name, code, description, start_date, end_date } = this.state;
+        const { name, code, description, start_date, end_date, errors } = this.state;
 
         return (
             <div>
@@ -51,35 +53,41 @@ class AddProject extends Component {
                                     <div className="form-row">
 
                                         <div className="form-group col-md-12">
-                                            {/* <label for="name">Project Name</label> */}
+                                            <label for="name">Project Name</label>
                                             <input
                                             type="text"
-                                            className="form-control form-control-md "
+                                            className={classnames("form-control form-control-md ", {"is-invalid": errors.name})}
                                             name="name" id="name"
                                             value={name}
                                             onChange={this.onChange}
                                             />
+                                            { errors.name ? 
+                                                    (<div className="invalid-feedback"> { errors.name } </div>) : null }
                                         </div>
 
                                         <div className="form-group col-md-12">
                                             <label for="code">Project Code</label>
                                             <input
                                             type="text"
-                                            className="form-control form-control-md"
+                                            className={classnames("form-control form-control-md ", {"is-invalid": errors.code})}
                                             name="code" id="code"
                                             value={code}
                                             onChange={this.onChange}
                                             />
+                                            { errors.code ? 
+                                                    (<div className="invalid-feedback"> { errors.code } </div>) : null }
                                         </div>
 
                                         <div className="form-group col-md-12">
                                             <label for="description">Description</label>
                                             <textarea
-                                            className="form-control form-control-md"
+                                            className={classnames("form-control form-control-md ", {"is-invalid": errors.description})}
                                             name="description" id="description"
                                             value={description}
                                             onChange={this.onChange}
                                             />
+                                            { errors.description ? 
+                                                    (<div className="invalid-feedback"> { errors.description } </div>) : null }
                                         </div>
 
                                         <div className="form-group col-md-6">
