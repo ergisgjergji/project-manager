@@ -91,24 +91,16 @@ class AddProject extends Component {
                                         </div>
 
                                         <div className="form-group col-md-6">
-                                            <label for="end_date">Start Date</label>
-                                            <input
-                                            type="date"
-                                            className="form-control form-control-md"
-                                            name="start_date" id="start_date"
-                                            value={start_date}
-                                            onChange={this.onChange}
+                                            <label for="start_date">Start Date</label>
+                                            <input type="date" className="form-control form-control-md" name="start_date" id="start_date" 
+                                                value={start_date} onChange={this.onChange}
                                             />
                                         </div>
 
                                         <div className="form-group col-md-6">
                                             <label for="end_date">Estimated End Date</label>
-                                            <input
-                                            type="date"
-                                            className="form-control form-control-md"
-                                            name="end_date" id="end_date"
-                                            value={end_date}
-                                            onChange={this.onChange}
+                                            <input type="date" className="form-control form-control-md" name="end_date" id="end_date"
+                                                value={end_date} onChange={this.onChange}
                                             />
                                         </div>
 
