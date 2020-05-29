@@ -1,5 +1,7 @@
 package com.ergis.projectmanager.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
@@ -24,6 +26,10 @@ public class ProjectTask {
     private Date updated_date;
 
     // ManyToOne with Backlog
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "backlog_id", updatable = false, nullable = false)
+    @JsonIgnore
+    private Backlog backlog;
 
     @PrePersist
     protected void onCreate(){
@@ -116,5 +122,13 @@ public class ProjectTask {
 
     public void setCode(String code) {
         this.code = code;
+    }
+    
+    public Backlog getBacklog() {
+        return backlog;
+    }
+
+    public void setBacklog(Backlog backlog) {
+        this.backlog = backlog;
     }
 }
