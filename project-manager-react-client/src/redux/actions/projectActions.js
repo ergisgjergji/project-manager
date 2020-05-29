@@ -25,5 +25,6 @@ export const getProject = (code, history) => dispatch => {
         .then(res => dispatch({
             type: GET_PROJECT,
             payload: res.data
-        }));
+        }))
+        .catch(err => history.push("/dashboard"));
 };
