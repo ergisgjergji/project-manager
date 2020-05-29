@@ -1,9 +1,8 @@
 package com.ergis.projectmanager.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
 public class Backlog {
@@ -15,6 +14,10 @@ public class Backlog {
     private String project_code;
 
     // OneToOne with Project
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "project_id", nullable = false)
+    @JsonIgnore
+    private Project project;
 
     // OneToMany with ProjectTask
 
@@ -43,5 +46,13 @@ public class Backlog {
 
     public void setProject_code(String project_code) {
         this.project_code = project_code;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }
