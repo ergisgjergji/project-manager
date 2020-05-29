@@ -13,7 +13,7 @@ public class ProjectTask {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(updatable = false)
-    private String project_sequence;
+    private String sequence;
     @Column(updatable = false)
     private String code;
     @NotBlank(message = "Please include a task summary")
@@ -26,7 +26,7 @@ public class ProjectTask {
     private Date updated_date;
 
     // ManyToOne with Backlog
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "backlog_id", updatable = false, nullable = false)
     @JsonIgnore
     private Backlog backlog;
@@ -52,12 +52,12 @@ public class ProjectTask {
         this.id = id;
     }
 
-    public String getProject_sequence() {
-        return project_sequence;
+    public String getSequence() {
+        return sequence;
     }
 
-    public void setProject_sequence(String project_sequence) {
-        this.project_sequence = project_sequence;
+    public void setSequence(String sequence) {
+        this.sequence = sequence;
     }
 
     public String getSummary() {

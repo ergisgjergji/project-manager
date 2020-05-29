@@ -27,7 +27,7 @@ public class ProjectService {
                 backlog.setProject_code(project.getCode().toUpperCase());
             }
             else {
-                project.setBacklog(backlogRepository.findByProject_code(project.getCode()));
+                project.setBacklog(backlogRepository.findByProject_code(project.getCode().toUpperCase()));
             }
             return projectRepository.save(project);
 
