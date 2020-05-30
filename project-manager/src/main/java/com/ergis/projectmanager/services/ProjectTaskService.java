@@ -60,14 +60,6 @@ public class ProjectTaskService {
         return projectTaskRepository.save(projectTask);
     }
 
-    public ProjectTask update(ProjectTask updatedProjectTask, String code, String sequence) {
-
-        ProjectTask projectTask = projectTaskRepository.findBySequence(sequence);
-        projectTask = updatedProjectTask;
-
-        return projectTaskRepository.save(projectTask);
-    }
-
     public Iterable<ProjectTask> findByCode(String code) {
 
         // Handle Project Not Found Exception
@@ -91,5 +83,25 @@ public class ProjectTaskService {
         if(!projectTask.getCode().equals(code.toUpperCase())) throw new ProjectCodeException("Task '" + sequence + "' doesn't exist in project '" + code.toUpperCase() + "'");
 
         return projectTaskRepository.findBySequence(sequence);
+    }
+
+    public ProjectTask update(ProjectTask updatedProjectTask, String code, String sequence) {
+
+        ProjectTask projectTask = findBySequence(code, sequence);
+        projectTask = updatedProjectTask;
+
+        return projectTaskRepository.save(projectTask);
+    }
+
+    public void deleteBySequence(String code, String sequence) {
+
+        ProjectTask projectTask = findBySequence(code, sequence); // This line performs the validations
+
+        Backlog backlog = projectTask.getBacklog();
+        List<ProjectTask> taskList = projectTask.getBacklog().getProjectTasks();
+        taskList.remove(projectTask);
+        backlogRepository.save(backlog);
+
+        projectTaskRepository.delete(projectTask);
     }
 }
