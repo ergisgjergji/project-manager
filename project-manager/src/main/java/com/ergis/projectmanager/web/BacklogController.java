@@ -33,10 +33,18 @@ public class BacklogController {
         return new ResponseEntity<ProjectTask>(projectTask1, HttpStatus.CREATED);
     }
 
-    // Get Project's Backlog (list of tasks)
+    // Get Backlog
     @GetMapping("/{code}")
     public Iterable<ProjectTask> getProjectBacklog(@PathVariable String code){
 
         return projectTaskService.findByCode(code);
+    }
+
+    // Get ProjectTask by sequence
+    @GetMapping("/{code}/{sequence}")
+    public ResponseEntity<?> getProjectTask(@PathVariable String code, @PathVariable String sequence) {
+
+        ProjectTask projectTask = projectTaskService.findBySequence(code, sequence);
+        return new ResponseEntity<ProjectTask>(projectTask, HttpStatus.OK);
     }
 }

@@ -19,7 +19,7 @@ public class ProjectTaskService {
     @Autowired
     private IBacklogRepository backlogRepository;
 
-    public ProjectTask saveOrUpdate(String code, ProjectTask projectTask){
+    public ProjectTask saveOrUpdate(String code, ProjectTask projectTask) {
 
         // Set the Backlog of Project with code `code`
         Backlog backlog = backlogRepository.findByProject_code(code.toUpperCase());
@@ -66,5 +66,12 @@ public class ProjectTaskService {
         if(backlog == null) throw new ProjectCodeException("Project with code '" + code.toUpperCase() + "' doesn't exist");
 
         return projectTaskRepository.findByCodeOrderByPriority(code.toUpperCase());
+    }
+
+    public ProjectTask findBySequence(String code, String sequence) {
+
+        // Make sure we are searching on the right backlog (code)
+
+        return projectTaskRepository.findBySequence(sequence);
     }
 }
