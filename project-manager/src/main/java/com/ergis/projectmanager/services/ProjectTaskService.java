@@ -60,6 +60,11 @@ public class ProjectTaskService {
     }
 
     public Iterable<ProjectTask> findByCode(String code) {
+
+        // Handle Project Not Found Exception
+        Backlog backlog = backlogRepository.findByProject_code(code.toUpperCase());
+        if(backlog == null) throw new ProjectCodeException("Project with code '" + code.toUpperCase() + "' doesn't exist");
+
         return projectTaskRepository.findByCodeOrderByPriority(code.toUpperCase());
     }
 }

@@ -34,6 +34,7 @@ public class ProjectTask {
     @PrePersist
     protected void onCreate(){
         this.created_date = new Date();
+        this.updated_date = this.created_date;
     }
 
     @PreUpdate

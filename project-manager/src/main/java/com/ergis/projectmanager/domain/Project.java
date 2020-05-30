@@ -50,6 +50,7 @@ public class Project {
     @PrePersist
     protected void onCreate(){
         this.created_date = new Date();
+        this.updated_date = this.created_date;
     }
     @PreUpdate
     protected void onUpdate(){
