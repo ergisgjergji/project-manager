@@ -42,8 +42,13 @@ public class ProjectTaskService {
 
         // INITIAL priority when priority is null: 3
         // PRIORITIES: 1-High 2-Normal 3-Low
+
 //        if(projectTask.getPriority() == 0 || projectTask.getPriority() == null)
 //            projectTask.setPriority(3);
+
+        // In the feature, remove this and uncomment the condition above
+        if(projectTask.getPriority() == null)
+            projectTask.setPriority(3);
 
         // INITIAL status when status is null:
         if(projectTask.getStatus() == "" || projectTask.getStatus() == null)
