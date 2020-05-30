@@ -24,8 +24,8 @@ class AddProject extends Component {
     }
     
     componentWillReceiveProps (nextProps) {
-        if( this.state.errors != nextProps.errors)
-            this.setState({ errors: nextProps.errors });
+        if( this.state.errors != nextProps.errorStore)
+            this.setState({ errors: nextProps.errorStore });
     }
 
     onChange = e => {
@@ -118,12 +118,12 @@ class AddProject extends Component {
 }
 
 AddProject.propTypes = {
-    errors: PropTypes.object.isRequired,
+    errorStore: PropTypes.object.isRequired,
     createOrUpdateProject: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-    errors: state.errors
+    errorStore: state.errorStore
 });
 
 export default connect(mapStateToProps, { createOrUpdateProject })(AddProject);

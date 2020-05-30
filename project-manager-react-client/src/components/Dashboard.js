@@ -10,11 +10,10 @@ class Dashboard extends Component {
 
 	componentDidMount() {
 		this.props.getProjects();
-		console.log("mount");
 	}
 
 	render() {
-		const { projects } = this.props.projectReducer;
+		const { projects } = this.props.projectStore;
 
 		return (
 			<div className="projects">
@@ -40,12 +39,12 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-    projectReducer: PropTypes.object.isRequired,
+    projectStore: PropTypes.object.isRequired,
     getProjects: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-    projectReducer: state.projectReducer
+    projectStore: state.projectStore
 });
 
 export default connect(mapStateToProps, { getProjects })(Dashboard);

@@ -30,8 +30,8 @@ class UpdateProject extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-
-        if( this.state.errors != nextProps.errors)
+        
+        if(nextProps.errors)
             this.setState({ errors: nextProps.errors });
 
         const { id, name, code, description, start_date, end_date } = nextProps.project;
@@ -71,7 +71,7 @@ class UpdateProject extends Component {
                                     <input type="hidden" name="id" value={id} />
 
                                     <div className="form-group col-md-12">
-                                        <label for="name">Project Name</label>
+                                        <label htmlFor="name">Project Name</label>
                                         <input type="text" id="name" name="name" 
                                             className={classnames("form-control form-control-md ", {"is-invalid": errors.name})}
                                             value={name} onChange={this.onChange} />
@@ -82,13 +82,13 @@ class UpdateProject extends Component {
                                     </div>
 
                                     <div className="form-group col-md-12">
-                                        <label for="code">Project Code</label>
+                                        <label htmlFor="code">Project Code</label>
                                         <input type="text" id="code" name="code" className="form-control form-control-md" disabled
                                             value={code} onChange={this.onChange} />
                                     </div>
 
                                     <div className="form-group col-md-12">
-                                        <label for="description">Project Description</label>
+                                        <label htmlFor="description">Project Description</label>
                                         <textarea name="description" id="description"
                                             className={classnames("form-control form-control-md ", {"is-invalid": errors.description})}
                                             value={description} onChange={this.onChange} />
@@ -99,13 +99,13 @@ class UpdateProject extends Component {
                                     </div>
 
                                     <div className="form-group col-md-6">
-                                        <label for="start_date">Start Date</label>
+                                        <label htmlFor="start_date">Start Date</label>
                                         <input type="date" id="start_date" name="start_date" className="form-control form-control-md"
                                             value={start_date} onChange={this.onChange} />
                                     </div>
 
                                     <div className="form-group col-md-6">
-                                        <label for="end_date">Estimated End Date</label>
+                                        <label htmlFor="end_date">Estimated End Date</label>
                                         <input type="date" id="end_date" name="end_date" className="form-control form-control-md"
                                             value={end_date} onChange={this.onChange} />
                                     </div>
@@ -130,8 +130,8 @@ UpdateProject.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    project: state.projectReducer.currentProject,
-    errors: state.errors
+    project: state.projectStore.currentProject,
+    errors: state.errorStore
 });
 
 export default connect(mapStateToProps, { getProject, createOrUpdateProject })(UpdateProject);

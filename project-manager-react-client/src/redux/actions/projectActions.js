@@ -25,6 +25,7 @@ export const getProjects = () => dispatch => {
 };
 
 export const getProject = (code, history) => dispatch => {
+
     axios.get(`/api/project/${code}`)
         .then(res => dispatch({
             type: GET_PROJECT,
@@ -34,6 +35,7 @@ export const getProject = (code, history) => dispatch => {
 };
 
 export const deleteProject = (code) => dispatch => {
+    
     axios.delete(`/api/project/${code}`)
         .then(res => dispatch({
             type: DELETE_PROJECT,
