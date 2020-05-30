@@ -9,6 +9,8 @@ import com.ergis.projectmanager.repositories.IProjectTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProjectTaskService {
 
@@ -55,5 +57,9 @@ public class ProjectTaskService {
             projectTask.setStatus("TO_DO");
 
         return projectTaskRepository.save(projectTask);
+    }
+
+    public Iterable<ProjectTask> findByCode(String code) {
+        return projectTaskRepository.findByCodeOrderByPriority(code.toUpperCase());
     }
 }
