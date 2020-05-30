@@ -4,6 +4,7 @@ import com.ergis.projectmanager.domain.Backlog;
 import com.ergis.projectmanager.domain.Project;
 import com.ergis.projectmanager.domain.ProjectTask;
 import com.ergis.projectmanager.exceptions.ProjectCodeException;
+import com.ergis.projectmanager.exceptions.ProjectTaskException;
 import com.ergis.projectmanager.repositories.IBacklogRepository;
 import com.ergis.projectmanager.repositories.IProjectTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,16 @@ public class ProjectTaskService {
 
     public ProjectTask findBySequence(String code, String sequence) {
 
-        // Make sure we are searching on the right backlog (code)
+        // Make sure we are searching on an existing backlog/project
+        Backlog backlog = backlogRepository.findByProject_code(code);
+        if(backlog == null) throw new ProjectCodeException("Project with code '" + code.toUpperCase() + "' doesn't exist");
+
+        // Make sure that our task exists
+        ProjectTask projectTask = projectTaskRepository.findBySequence(sequence);
+        if(projectTask == null) throw new ProjectTaskException("Task '" + sequence + "' doesn't exist");
+
+        // Make sure ProjectTask belongs to the corresponding backlog
+        if(!projectTask.getCode().equals(code.toUpperCase())) throw new ProjectCodeException("Task '" + sequence + "' doesn't exist in project '" + code.toUpperCase() + "'");
 
         return projectTaskRepository.findBySequence(sequence);
     }
