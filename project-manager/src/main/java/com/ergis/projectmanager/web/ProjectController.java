@@ -26,7 +26,7 @@ public class ProjectController {
     private MapValidationErrorService mapValidationErrorService;
 
     @PostMapping("")
-    public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result) {
+    public ResponseEntity<?> createOrUpdateProject(@Valid @RequestBody Project project, BindingResult result) {
 
         ResponseEntity<?> errors = mapValidationErrorService.MapValidationError(result);
         if(errors != null) return errors;

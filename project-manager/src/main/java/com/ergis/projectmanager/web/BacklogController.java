@@ -24,12 +24,12 @@ public class BacklogController {
 
     // Create a ProjectTask
     @PostMapping("/{code}")
-    public ResponseEntity<?> addProjectTaskToBacklog(@Valid @RequestBody ProjectTask projectTask, BindingResult result, @PathVariable String code){
+    public ResponseEntity<?> createProjectTask(@Valid @RequestBody ProjectTask projectTask, BindingResult result, @PathVariable String code){
 
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationError(result);
         if(errorMap != null) return errorMap;
 
-        ProjectTask projectTask1 = projectTaskService.saveOrUpdate(code, projectTask);
+        ProjectTask projectTask1 = projectTaskService.save(code, projectTask);
         return new ResponseEntity<ProjectTask>(projectTask1, HttpStatus.CREATED);
     }
 
@@ -46,5 +46,16 @@ public class BacklogController {
 
         ProjectTask projectTask = projectTaskService.findBySequence(code, sequence);
         return new ResponseEntity<ProjectTask>(projectTask, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{code}/{sequence}")
+    public ResponseEntity<?> updateProjectTask(@Valid @RequestBody ProjectTask projectTask, BindingResult result, @PathVariable String code, @PathVariable String sequence) {
+
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationError(result);
+        if(errorMap != null) return errorMap;
+
+        ProjectTask updatedProjectTask = projectTaskService.update(projectTask, code, sequence);
+
+        return new ResponseEntity<ProjectTask>(updatedProjectTask, HttpStatus.OK);
     }
 }

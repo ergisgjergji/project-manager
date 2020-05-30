@@ -20,7 +20,7 @@ public class ProjectTaskService {
     @Autowired
     private IBacklogRepository backlogRepository;
 
-    public ProjectTask saveOrUpdate(String code, ProjectTask projectTask) {
+    public ProjectTask save(String code, ProjectTask projectTask) {
 
         // Set the Backlog of Project with code `code`
         Backlog backlog = backlogRepository.findByProject_code(code.toUpperCase());
@@ -56,6 +56,14 @@ public class ProjectTaskService {
         // INITIAL status when status is null:
         if(projectTask.getStatus() == "" || projectTask.getStatus() == null)
             projectTask.setStatus("TO_DO");
+
+        return projectTaskRepository.save(projectTask);
+    }
+
+    public ProjectTask update(ProjectTask updatedProjectTask, String code, String sequence) {
+
+        ProjectTask projectTask = projectTaskRepository.findBySequence(sequence);
+        projectTask = updatedProjectTask;
 
         return projectTaskRepository.save(projectTask);
     }
