@@ -97,10 +97,10 @@ public class ProjectTaskService {
 
         ProjectTask projectTask = findBySequence(code, sequence); // This line performs the validations
 
-        Backlog backlog = projectTask.getBacklog();
-        List<ProjectTask> taskList = projectTask.getBacklog().getProjectTasks();
-        taskList.remove(projectTask);
-        backlogRepository.save(backlog);
+//        Backlog backlog = projectTask.getBacklog();
+//        List<ProjectTask> taskList = projectTask.getBacklog().getProjectTasks();
+//        taskList.remove(projectTask);
+//        backlogRepository.save(backlog);
 
         projectTaskRepository.delete(projectTask);
     }
