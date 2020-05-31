@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class ProjectTask extends Component {
 
@@ -35,9 +36,9 @@ class ProjectTask extends Component {
                         {project_task.acceptanceCriteria}
                     </p>
 
-                    <a href="" className="btn btn-primary">
+                    <Link to={`/updateProjectTask/${project_task.code}/${project_task.sequence}`} className="btn btn-primary">
                         View / Update
-                    </a>
+                    </Link>
 
                     <button className="btn btn-danger ml-4">
                         Delete

@@ -48,6 +48,7 @@ public class BacklogController {
         return new ResponseEntity<ProjectTask>(projectTask, HttpStatus.OK);
     }
 
+    // Update ProjectTask
     @PatchMapping("/{code}/{sequence}")
     public ResponseEntity<?> updateProjectTask(@Valid @RequestBody ProjectTask projectTask, BindingResult result, @PathVariable String code, @PathVariable String sequence) {
 
@@ -59,6 +60,7 @@ public class BacklogController {
         return new ResponseEntity<ProjectTask>(updatedProjectTask, HttpStatus.OK);
     }
 
+    // Delete ProjectTask
     @DeleteMapping("/{code}/{sequence}")
     public ResponseEntity<?> deleteProjectTask(@PathVariable String code, @PathVariable String sequence) {
 

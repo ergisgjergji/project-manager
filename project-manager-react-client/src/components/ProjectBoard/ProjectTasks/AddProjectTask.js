@@ -52,7 +52,7 @@ class AddProjectTask extends Component {
                         <div className="col-10 col-md-8 m-auto">
 
                             <h4 className="display-4 text-center">New Task</h4>
-                            <p className="lead text-center">Project Name + Project Code</p>
+                            <p className="lead text-center">Project: {code}</p>
 
                             <form onSubmit={this.onSubmit}>
                                 <div className="form-row">
