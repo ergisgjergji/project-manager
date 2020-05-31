@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ERRORS, GET_BACKLOG, GET_PROJECT_TASK } from './types';
+import { GET_ERRORS, GET_BACKLOG, GET_PROJECT_TASK, DELETE_PROJECT_TASK } from './types';
 import { clearErrors } from './errorActions';
 
 export const createProjectTask = (code, project_task, history) => dispatch => {
@@ -51,6 +51,19 @@ export const updateProjectTask = (code, sequence, project_task, history) => disp
             history.push(`/projectBoard/${code}`);
             dispatch(clearErrors());
         })
+        .catch(err => dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        }));
+}
+
+export const deleteProjectTask = (code, sequence) => dispatch => {
+
+    axios.delete(`/api/backlog/${code}/${sequence}`)
+        .then(res => dispatch({
+            type: DELETE_PROJECT_TASK,
+            payload: sequence
+        }))
         .catch(err => dispatch({
             type: GET_ERRORS,
             payload: err.response.data

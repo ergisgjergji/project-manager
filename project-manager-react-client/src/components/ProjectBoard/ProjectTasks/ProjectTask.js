@@ -1,7 +1,31 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { deleteProjectTask } from './../../../redux/actions/backlogActions';
+
+import { confirmAlert } from 'react-confirm-alert';
+
 class ProjectTask extends Component {
+
+    onDeleteClick = (code, sequence) => {
+		confirmAlert({
+			title: 'Confirm',
+			message: 'Are u sure u want to delete this task?',
+			buttons: [
+				{
+					label: 'Yes',
+					className: "confirm-yes",
+					onClick: () => this.props.deleteProjectTask(code, sequence)
+				},
+				{
+					label: 'No',
+					className: "confirm-no"
+			  	}
+			]
+		});
+	}
 
     render() {
 
@@ -40,13 +64,17 @@ class ProjectTask extends Component {
                         View / Update
                     </Link>
 
-                    <button className="btn btn-danger ml-4">
+                    <button className="btn btn-danger ml-4" onClick={this.onDeleteClick.bind(this, project_task.code,project_task.sequence)}>
                         Delete
                     </button>
                 </div>
             </div>
         )
     }
-}
+};
 
-export default ProjectTask;
+ProjectTask.propTypes = {
+    deleteProjectTask: PropTypes.func.isRequired
+};
+
+export default connect(null, { deleteProjectTask })(ProjectTask);
