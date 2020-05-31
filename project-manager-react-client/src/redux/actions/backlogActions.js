@@ -22,5 +22,8 @@ export const getBacklog = (code) => dispatch => {
             type: GET_BACKLOG,
             payload: res.data
         }))
-        .catch(err => console.log(err));
+        .catch(err => dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        }));
 }
