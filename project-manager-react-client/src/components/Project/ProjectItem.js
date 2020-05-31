@@ -46,11 +46,12 @@ class ProjectItem extends Component {
 
 						<div className="col-md-4 d-none d-lg-block">
 							<ul className="list-group">
-								<a href="#">
+
+								<Link to={`/projectBoard/${project.code}`}>
 									<li className="list-group-item board">
 										<i className="fa fa-flag-checkered pr-1"> Project Board </i>
 									</li>
-								</a>
+								</Link>
 
 								<Link to={`/updateProject/${project.code}`}>
 									<li className="list-group-item update">
@@ -61,6 +62,7 @@ class ProjectItem extends Component {
 								<li className="list-group-item delete" onClick={this.onDeleteClick.bind(this, project.code)}>
 									<i className="fa fa-minus-circle pr-1"> Delete Project</i>
 								</li>
+								
 							</ul>
 						</div>
 					</div>
