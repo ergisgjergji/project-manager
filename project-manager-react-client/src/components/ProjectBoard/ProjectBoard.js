@@ -18,6 +18,8 @@ class ProjectBoard extends Component {
 
     render() {
         const { code } = this.props.match.params;
+        const { project_tasks } = this.props.backlogStore;
+
         return (
             <div className="container">
 
@@ -25,7 +27,7 @@ class ProjectBoard extends Component {
                     Create Project Task
                 </Link>
                 <hr />
-                <Backlog/>
+                <Backlog project_tasks={project_tasks}/>
                 
             </div>
         )

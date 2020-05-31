@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import ProjectTask from './ProjectTasks/ProjectTask';
 
 class Backlog extends Component {
+
     render() {
+
+        const { project_tasks } = this.props;
+        const render_tasks = project_tasks.map(task => (
+            <ProjectTask key={task.id} project_task={task}/>
+        ));
+
         return (
             <div className="container">
                 <div className="row">
@@ -13,7 +20,9 @@ class Backlog extends Component {
                                 <h3>TO DO</h3>
                             </div>
                         </div>
-                        <ProjectTask/>
+                        {
+                            render_tasks
+                        }
                     </div>
 
                     <div className="col-md-4">
@@ -22,7 +31,6 @@ class Backlog extends Component {
                                 <h3>In Progress</h3>
                             </div>
                         </div>
-                        <ProjectTask/>
                     </div>
                     
                     <div className="col-md-4">
@@ -31,7 +39,6 @@ class Backlog extends Component {
                                 <h3>Done</h3>
                             </div>
                         </div>
-                        <ProjectTask/>
                     </div>
                 </div>
             </div>
