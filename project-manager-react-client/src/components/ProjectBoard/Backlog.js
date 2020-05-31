@@ -6,7 +6,16 @@ class Backlog extends Component {
     render() {
 
         const { project_tasks } = this.props;
-        const render_tasks = project_tasks.map(task => (
+
+        let render_todo = project_tasks.filter(task => task.status === "TO_DO").map(task => (
+            <ProjectTask key={task.id} project_task={task}/>
+        ));
+
+        let render_inProgress = project_tasks.filter(task => task.status === "IN_PROGRESS").map(task => (
+            <ProjectTask key={task.id} project_task={task}/>
+        ));
+
+        let render_done = project_tasks.filter(task => task.status === "DONE").map(task => (
             <ProjectTask key={task.id} project_task={task}/>
         ));
 
@@ -21,16 +30,19 @@ class Backlog extends Component {
                             </div>
                         </div>
                         {
-                            render_tasks
+                            render_todo
                         }
                     </div>
 
                     <div className="col-md-4">
                         <div className="card text-center mb-2">
-                            <div className="card-header bg-warning text-white">
+                            <div className="card-header bg-primary text-white">
                                 <h3>In Progress</h3>
                             </div>
                         </div>
+                        {
+                            render_inProgress
+                        }
                     </div>
                     
                     <div className="col-md-4">
@@ -39,6 +51,9 @@ class Backlog extends Component {
                                 <h3>Done</h3>
                             </div>
                         </div>
+                        {
+                            render_done
+                        }
                     </div>
                 </div>
             </div>
