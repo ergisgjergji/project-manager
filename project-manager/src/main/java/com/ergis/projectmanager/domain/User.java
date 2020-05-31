@@ -1,12 +1,17 @@
 package com.ergis.projectmanager.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,14 +22,11 @@ public class User {
     @Column(unique = true)
     private String username;
 
-    @NotBlank(message = "Please enter your full name")
+    @NotBlank(message = "Name field is required")
     private String full_name;
 
     @NotBlank(message = "Password field is required")
     private String password;
-
-    @Transient // This field will not be persisted in the database. It is just for validation mechanism on the code part
-    private String confirm_password;
 
     private Date created_date;
     private Date updated_date;
@@ -77,14 +79,6 @@ public class User {
         this.password = password;
     }
 
-    public String getConfirm_password() {
-        return confirm_password;
-    }
-
-    public void setConfirm_password(String confirm_password) {
-        this.confirm_password = confirm_password;
-    }
-
     public Date getCreated_date() {
         return created_date;
     }
@@ -99,5 +93,39 @@ public class User {
 
     public void setUpdated_date(Date updated_date) {
         this.updated_date = updated_date;
+    }
+
+    /*
+        UserDetails interface methods
+    */
+
+    @Override
+    @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isEnabled() {
+        return true;
     }
 }

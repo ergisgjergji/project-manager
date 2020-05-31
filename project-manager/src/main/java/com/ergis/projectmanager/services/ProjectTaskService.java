@@ -1,16 +1,13 @@
 package com.ergis.projectmanager.services;
 
 import com.ergis.projectmanager.domain.Backlog;
-import com.ergis.projectmanager.domain.Project;
 import com.ergis.projectmanager.domain.ProjectTask;
-import com.ergis.projectmanager.exceptions.ProjectCodeException;
-import com.ergis.projectmanager.exceptions.ProjectTaskException;
+import com.ergis.projectmanager.exceptions.ProjectExceptions.ProjectCodeException;
+import com.ergis.projectmanager.exceptions.ProjectTaskExceptions.ProjectTaskException;
 import com.ergis.projectmanager.repositories.IBacklogRepository;
 import com.ergis.projectmanager.repositories.IProjectTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ProjectTaskService {

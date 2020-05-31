@@ -1,4 +1,4 @@
-package com.ergis.projectmanager.exceptions;
+package com.ergis.projectmanager.exceptions.ProjectTaskExceptions;
 
 public class ProjectTaskExceptionResponse {
 

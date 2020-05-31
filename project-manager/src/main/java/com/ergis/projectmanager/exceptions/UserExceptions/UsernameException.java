@@ -1,12 +1,12 @@
-package com.ergis.projectmanager.exceptions;
+package com.ergis.projectmanager.exceptions.UserExceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class ProjectTaskException extends RuntimeException {
+public class UsernameException extends RuntimeException {
 
-    public ProjectTaskException(String message) {
+    public UsernameException(String message) {
         super(message);
     }
 }

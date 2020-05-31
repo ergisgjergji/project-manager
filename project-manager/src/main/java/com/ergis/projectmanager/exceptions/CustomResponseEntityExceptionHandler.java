@@ -1,5 +1,11 @@
 package com.ergis.projectmanager.exceptions;
 
+import com.ergis.projectmanager.exceptions.ProjectExceptions.ProjectCodeException;
+import com.ergis.projectmanager.exceptions.ProjectExceptions.ProjectCodeExceptionResponse;
+import com.ergis.projectmanager.exceptions.ProjectTaskExceptions.ProjectTaskException;
+import com.ergis.projectmanager.exceptions.ProjectTaskExceptions.ProjectTaskExceptionResponse;
+import com.ergis.projectmanager.exceptions.UserExceptions.UsernameException;
+import com.ergis.projectmanager.exceptions.UserExceptions.UsernameExceptionResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -21,6 +27,12 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     @ExceptionHandler
     public final ResponseEntity<Object> handleProjectTaskException(ProjectTaskException ex, WebRequest request) {
         ProjectTaskExceptionResponse exceptionResponse = new ProjectTaskExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleUsernameException(UsernameException ex, WebRequest request) {
+        UsernameExceptionResponse exceptionResponse = new UsernameExceptionResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 }
