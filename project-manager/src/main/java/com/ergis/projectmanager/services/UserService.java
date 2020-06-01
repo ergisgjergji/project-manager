@@ -17,11 +17,9 @@ public class UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder; // Comes with Spring Security
 
     public User save(User newUser) {
-        /*
-            CASES:
-            - 'Username' has to be unique (UsernameException)
-            - 'Password' must be encrypted
-        */
+
+        // Username has to be unique (UsernameException)
+        // Password must be encrypted
 
         User user = userRepository.findByUsername(newUser.getUsername());
         if(user != null) throw new UsernameException("Username '" + newUser.getUsername() + "' already exists");
