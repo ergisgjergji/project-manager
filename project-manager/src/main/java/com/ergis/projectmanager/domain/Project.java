@@ -32,6 +32,11 @@ public class Project {
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date updated_date;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user")
+    @JsonIgnore
+    private User user;
+
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
     @JsonIgnore
     private Backlog backlog;
@@ -119,5 +124,13 @@ public class Project {
 
     public void setUpdated_date(Date updated_date) {
         this.updated_date = updated_date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

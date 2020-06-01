@@ -2,9 +2,11 @@ package com.ergis.projectmanager.services;
 
 import com.ergis.projectmanager.domain.Backlog;
 import com.ergis.projectmanager.domain.Project;
+import com.ergis.projectmanager.domain.User;
 import com.ergis.projectmanager.exceptions.ProjectExceptions.ProjectCodeException;
 import com.ergis.projectmanager.repositories.IBacklogRepository;
 import com.ergis.projectmanager.repositories.IProjectRepository;
+import com.ergis.projectmanager.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +17,14 @@ public class ProjectService {
     private IProjectRepository projectRepository;
     @Autowired
     private IBacklogRepository backlogRepository;
+    @Autowired
+    private IUserRepository userRepository;
 
-    public Project saveOrUpdate(Project project) {
+    public Project saveOrUpdate(Project project, String username) {
         try {
+            User user = userRepository.findByUsername(username);
+            project.setUser(user);
+
             project.setCode(project.getCode().toUpperCase());
 
             if(project.getId() == null) {
