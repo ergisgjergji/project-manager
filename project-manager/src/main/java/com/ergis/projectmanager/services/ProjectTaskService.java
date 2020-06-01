@@ -16,13 +16,13 @@ public class ProjectTaskService {
     private IProjectTaskRepository projectTaskRepository;
     @Autowired
     private IBacklogRepository backlogRepository;
+    @Autowired
+    private ProjectService projectService;
 
-    public ProjectTask save(String code, ProjectTask projectTask) {
+    public ProjectTask save(String code, ProjectTask projectTask, String username) {
 
-        // Set the Backlog of Project with code `code`
-        Backlog backlog = backlogRepository.findByProject_code(code.toUpperCase());
-
-        // If backlog is null it means there is no project with this code
+        // Check Project/Backlog Ownership
+        Backlog backlog = projectService.findByCode(code.toUpperCase(), username).getBacklog();
         if(backlog == null) throw new ProjectCodeException("Project with code '" + code.toUpperCase() + "' doesn't exist");
 
         projectTask.setBacklog(backlog);
@@ -43,12 +43,8 @@ public class ProjectTaskService {
         // INITIAL priority when priority is null: 3
         // PRIORITIES: 1-High 2-Normal 3-Low
 
-        if(projectTask.getPriority() == 0 || projectTask.getPriority() == null)
+        if(projectTask.getPriority() == null || projectTask.getPriority() == 0)
             projectTask.setPriority(3);
-
-        // In the feature, remove this and uncomment the condition above
-//         if(projectTask.getPriority() == null)
-//            projectTask.setPriority(3);
 
         // INITIAL status when status is null:
         if(projectTask.getStatus() == "" || projectTask.getStatus() == null)
@@ -57,19 +53,19 @@ public class ProjectTaskService {
         return projectTaskRepository.save(projectTask);
     }
 
-    public Iterable<ProjectTask> findByCode(String code) {
+    public Iterable<ProjectTask> findByCode(String code, String username) {
 
-        // Handle Project Not Found Exception
-        Backlog backlog = backlogRepository.findByProject_code(code.toUpperCase());
+        // Check Project/Backlog Ownership
+        Backlog backlog = projectService.findByCode(code.toUpperCase(), username).getBacklog();
         if(backlog == null) throw new ProjectCodeException("Project with code '" + code.toUpperCase() + "' doesn't exist");
 
         return projectTaskRepository.findByCodeOrderByPriority(code.toUpperCase());
     }
 
-    public ProjectTask findBySequence(String code, String sequence) {
+    public ProjectTask findBySequence(String code, String sequence, String username) {
 
-        // Make sure we are searching on an existing backlog/project
-        Backlog backlog = backlogRepository.findByProject_code(code);
+        // Check Project/Backlog Ownership
+        Backlog backlog = projectService.findByCode(code.toUpperCase(), username).getBacklog();
         if(backlog == null) throw new ProjectCodeException("Project with code '" + code.toUpperCase() + "' doesn't exist");
 
         // Make sure that our task exists
@@ -82,17 +78,17 @@ public class ProjectTaskService {
         return projectTaskRepository.findBySequence(sequence);
     }
 
-    public ProjectTask update(ProjectTask updatedProjectTask, String code, String sequence) {
+    public ProjectTask update(ProjectTask updatedProjectTask, String code, String sequence, String username) {
 
-        ProjectTask projectTask = findBySequence(code, sequence);
+        ProjectTask projectTask = findBySequence(code, sequence, username);
         projectTask = updatedProjectTask;
 
         return projectTaskRepository.save(projectTask);
     }
 
-    public void deleteBySequence(String code, String sequence) {
+    public void deleteBySequence(String code, String sequence, String username) {
 
-        ProjectTask projectTask = findBySequence(code, sequence); // This line performs the validations
+        ProjectTask projectTask = findBySequence(code, sequence, username); // This line performs the validations
 
 //        Backlog backlog = projectTask.getBacklog();
 //        List<ProjectTask> taskList = projectTask.getBacklog().getProjectTasks();

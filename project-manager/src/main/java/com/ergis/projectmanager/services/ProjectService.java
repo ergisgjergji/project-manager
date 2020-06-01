@@ -60,10 +60,10 @@ public class ProjectService {
         }
     }
 
+    // Existence/Ownership logic
     public Project findByCode(String code, String username) {
 
         Project project = projectRepository.findByCode(code.toUpperCase());
-
         if(project == null)
             throw new ProjectCodeException("Project with code '" + code.toUpperCase() + "' doesn't exist");
         if(!project.getUser().getUsername().equals(username))
