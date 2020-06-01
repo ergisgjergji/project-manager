@@ -27,14 +27,17 @@ public class ProjectService {
 
             project.setCode(project.getCode().toUpperCase());
 
+            // Create
             if(project.getId() == null) {
                 Backlog backlog = new Backlog();
                 project.setBacklog(backlog);
                 backlog.setProject(project);
                 backlog.setProject_code(project.getCode().toUpperCase());
             }
+            // Update
             else {
-                project.setBacklog(backlogRepository.findByProject_code(project.getCode().toUpperCase()));
+                Backlog backlog = backlogRepository.findByProject_code(project.getCode().toUpperCase());
+                project.setBacklog(backlog);
             }
             return projectRepository.save(project);
 
@@ -43,24 +46,27 @@ public class ProjectService {
         }
     }
 
-    public Project findByCode(String code) {
+    public Project findByCode(String code, String username) {
 
         Project project = projectRepository.findByCode(code.toUpperCase());
 
         if(project == null)
             throw new ProjectCodeException("Project with code '" + code.toUpperCase() + "' doesn't exist");
+        if(!project.getUser().getUsername().equals(username))
+            throw new ProjectCodeException("Project with code '" + code.toUpperCase() + "' not found");
 
         return projectRepository.findByCode(code.toUpperCase());
     }
 
-    public Iterable<Project> findAll() {
-        return projectRepository.findAll();
+    public Iterable<Project> findAll(String username) {
+
+        User user = userRepository.findByUsername(username);
+        return projectRepository.findAllByUser(user);
     }
 
-    public void deleteByCode(String code) {
+    public void deleteByCode(String code, String username) {
 
-        Project project = projectRepository.findByCode(code.toUpperCase());
-        if(project == null) throw new ProjectCodeException("Project with code '" + code.toUpperCase() + "' doesn't exist");
+        Project project = findByCode(code.toUpperCase(), username); // We can use this since it already has the logic
         projectRepository.delete(project);
     }
 }
