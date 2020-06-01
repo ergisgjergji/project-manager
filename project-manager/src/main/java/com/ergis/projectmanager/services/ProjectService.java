@@ -21,41 +21,6 @@ public class ProjectService {
     @Autowired
     private IUserRepository userRepository;
 
-//    public Project saveOrUpdate(Project project, String username) {
-//
-//        // UPDATE
-//        if(project.getId() != null) {
-//
-//            Project existingProject = projectRepository.findByCode(project.getCode());
-//            if(existingProject != null && (!existingProject.getUser().getUsername().equals(username)))
-//                throw new ProjectCodeException("Project not found")
-//        }
-//
-//        try {
-//            User user = userRepository.findByUsername(username);
-//            project.setUser(user);
-//
-//            project.setCode(project.getCode().toUpperCase());
-//
-//            // Create
-//            if(project.getId() == null) {
-//                Backlog backlog = new Backlog();
-//                project.setBacklog(backlog);
-//                backlog.setProject(project);
-//                backlog.setProject_code(project.getCode().toUpperCase());
-//            }
-//            // Update
-//            else {
-//                Backlog backlog = backlogRepository.findByProject_code(project.getCode().toUpperCase());
-//                project.setBacklog(backlog);
-//            }
-//            return projectRepository.save(project);
-//
-//        } catch(Exception e) {
-//            throw new ProjectCodeException("Project with code '" + project.getCode().toUpperCase() + "' already exists");
-//        }
-//    }
-
     public Project saveOrUpdate(Project project, String username) {
 
         User user = userRepository.findByUsername(username);
@@ -90,6 +55,7 @@ public class ProjectService {
 
             Backlog backlog = backlogRepository.findByProject_code(project.getCode().toUpperCase());
             project.setBacklog(backlog);
+            project.setUser(user);
             return projectRepository.save(project);
         }
     }
