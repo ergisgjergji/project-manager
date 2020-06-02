@@ -7,8 +7,11 @@ import './css/App.css';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import './css/react-confirm-alert.css';
 
-import Dashboard from './components/Dashboard';
 import Header from './components/Layout/Header';
+import LandingPage from './components/Layout/LandingPage';
+import Register from './components/Authentication/Register';
+import Login from './components/Authentication/Login';
+import Dashboard from './components/Dashboard';
 import AddProject from './components/Project/AddProject';
 import UpdateProject from './components/Project/UpdateProject';
 import ProjectBoard from './components/ProjectBoard/ProjectBoard';
@@ -20,6 +23,15 @@ function App() {
     <Provider store={store}>
       <Router>
         <Header/>
+        {
+          // PUBLIC Routes
+        }
+        <Route exact path="/" component={LandingPage}/>
+        <Route exact path="/register" component={Register}/>
+        <Route exact path="/login" component={Login}/>
+        {
+          // PRIVATE Routes
+        }
         <Route exact path="/dashboard" component={Dashboard}/>
         <Route exact path="/addProject" component={AddProject}/>
         <Route exact path="/updateProject/:code" component={UpdateProject}/>
