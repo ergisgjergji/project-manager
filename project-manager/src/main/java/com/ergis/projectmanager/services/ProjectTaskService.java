@@ -55,18 +55,16 @@ public class ProjectTaskService {
 
     public Iterable<ProjectTask> findByCode(String code, String username) {
 
-        // Check Project/Backlog Ownership
+        // CHECK: Project exists / Backlog ownership
         Backlog backlog = projectService.findByCode(code.toUpperCase(), username).getBacklog();
-        if(backlog == null) throw new ProjectCodeException("Project with code '" + code.toUpperCase() + "' doesn't exist");
 
         return projectTaskRepository.findByCodeOrderByPriority(code.toUpperCase());
     }
 
     public ProjectTask findBySequence(String code, String sequence, String username) {
 
-        // Check Project/Backlog Ownership
+        // CHECK: Project exists / Backlog ownership
         Backlog backlog = projectService.findByCode(code.toUpperCase(), username).getBacklog();
-        if(backlog == null) throw new ProjectCodeException("Project with code '" + code.toUpperCase() + "' doesn't exist");
 
         // Make sure that our task exists
         ProjectTask projectTask = projectTaskRepository.findBySequence(sequence);
@@ -80,7 +78,7 @@ public class ProjectTaskService {
 
     public ProjectTask update(ProjectTask updatedProjectTask, String code, String sequence, String username) {
 
-        ProjectTask projectTask = findBySequence(code, sequence, username);
+        ProjectTask projectTask = findBySequence(code, sequence, username); // This line performs the validations
         projectTask = updatedProjectTask;
 
         return projectTaskRepository.save(projectTask);
@@ -89,12 +87,6 @@ public class ProjectTaskService {
     public void deleteBySequence(String code, String sequence, String username) {
 
         ProjectTask projectTask = findBySequence(code, sequence, username); // This line performs the validations
-
-//        Backlog backlog = projectTask.getBacklog();
-//        List<ProjectTask> taskList = projectTask.getBacklog().getProjectTasks();
-//        taskList.remove(projectTask);
-//        backlogRepository.save(backlog);
-
         projectTaskRepository.delete(projectTask);
     }
 }
