@@ -9,8 +9,8 @@ import './css/react-confirm-alert.css';
 
 import Header from './components/Layout/Header';
 import LandingPage from './components/Layout/LandingPage';
-import Register from './components/Authentication/Register';
-import Login from './components/Authentication/Login';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
 import Dashboard from './components/Dashboard';
 import AddProject from './components/Project/AddProject';
 import UpdateProject from './components/Project/UpdateProject';

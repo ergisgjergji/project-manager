@@ -1,4 +1,4 @@
-import { GET_ERRORS, CLEAR_ERRORS } from '../actions/types';
+import { GET_ERRORS, CLEAR_ERRORS, PASSWORD_MISMATCH } from '../actions/types';
 
 const initialState = {};
 
@@ -11,6 +11,11 @@ export default function( state = initialState, action ) {
 
         case CLEAR_ERRORS:
             return {};
+
+        case PASSWORD_MISMATCH:
+            const newState = {...state};
+            newState.confirm_password = "Passwords do not match";
+            return newState;
 
         default:
             return state;

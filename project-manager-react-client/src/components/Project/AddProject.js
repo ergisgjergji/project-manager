@@ -56,7 +56,7 @@ class AddProject extends Component {
                                     <div className="form-row">
 
                                         <div className="form-group col-md-12">
-                                            <label for="name">Project Name</label>
+                                            <label htmlFor="name">Project Name</label>
                                             <input type="text" name="name" id="name"
                                                 className={classnames("form-control form-control-md ", {"is-invalid": errors.name})}
                                                 value={name} onChange={this.onChange} />
@@ -67,7 +67,7 @@ class AddProject extends Component {
                                         </div>
 
                                         <div className="form-group col-md-12">
-                                            <label for="code">Project Code</label>
+                                            <label htmlFor="code">Project Code</label>
                                             <input type="text" name="code" id="code"
                                                 className={classnames("form-control form-control-md ", {"is-invalid": errors.code})}
                                                 value={code} onChange={this.onChange} />
@@ -78,7 +78,7 @@ class AddProject extends Component {
                                         </div>
 
                                         <div className="form-group col-md-12">
-                                            <label for="description">Description</label>
+                                            <label htmlFor="description">Description</label>
                                             <textarea name="description" id="description" 
                                                 className={classnames("form-control form-control-md ", {"is-invalid": errors.description})}
                                                 value={description} onChange={this.onChange} />
@@ -89,21 +89,18 @@ class AddProject extends Component {
                                         </div>
 
                                         <div className="form-group col-md-6">
-                                            <label for="start_date">Start Date</label>
+                                            <label htmlFor="start_date">Start Date</label>
                                             <input type="date" className="form-control form-control-md" name="start_date" id="start_date" 
                                                 value={start_date} onChange={this.onChange} />
                                         </div>
 
                                         <div className="form-group col-md-6">
-                                            <label for="end_date">Estimated End Date</label>
+                                            <label htmlFor="end_date">Estimated End Date</label>
                                             <input type="date" className="form-control form-control-md" name="end_date" id="end_date"
                                                 value={end_date} onChange={this.onChange} />
                                         </div>
 
-                                        <input 
-                                        type="submit" 
-                                        className="btn btn-primary btn-block mt-4"
-                                        />
+                                        <input type="submit" className="btn btn-primary btn-block mt-4"/>
 
                                     </div>
                                 </form>

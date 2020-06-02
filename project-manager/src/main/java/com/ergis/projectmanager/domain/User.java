@@ -1,6 +1,7 @@
 package com.ergis.projectmanager.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -28,6 +29,7 @@ public class User implements UserDetails {
     private String full_name;
 
     @NotBlank(message = "Password field is required")
+    @Length(min = 6, message = "Password must include at least 6 characters")
     private String password;
 
     private Date created_date;
