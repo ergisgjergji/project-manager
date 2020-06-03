@@ -49,7 +49,7 @@ class Register extends Component {
                 <div className="container">
                     <div className="row">
 
-                        <div className="col-10 col-md-8 m-auto">
+                        <div className="col-10 col-md-6 m-auto">
 
                             <h1 className="display-4 text-center">Sign Up</h1>
                             <p className="lead text-center">Create your Account</p>
@@ -60,7 +60,7 @@ class Register extends Component {
                                     <div className="form-group col-md-12">
                                         <label htmlFor="full_name">Full Name</label>
                                         <input required type="text" name="full_name" id="full_name"
-                                            className={classnames("form-control form-control-md ", {"is-invalid": errors.full_name})}
+                                            className={classnames("form-control form-control-md shadow", {"is-invalid": errors.full_name})}
                                             value={full_name} onChange={this.onChange} />
                                         { 
                                             errors.full_name ? 
@@ -71,7 +71,7 @@ class Register extends Component {
                                     <div className="form-group col-md-12">
                                         <label htmlFor="username">Email Address</label>
                                         <input required type="email" id="username" name="username"
-                                            className={classnames("form-control form-control-md ", {"is-invalid": errors.username})}
+                                            className={classnames("form-control form-control-md shadow", {"is-invalid": errors.username})}
                                             value={username} onChange={this.onChange} />
                                         { 
                                             errors.username ? 
@@ -82,7 +82,7 @@ class Register extends Component {
                                     <div className="form-group col-md-12">
                                         <label htmlFor="password">Password</label>
                                         <input required type="password" id="password" name="password"
-                                            className={classnames("form-control form-control-md ", {"is-invalid": errors.password})}
+                                            className={classnames("form-control form-control-md shadow", {"is-invalid": errors.password})}
                                             value={password} onChange={this.onChange} />
                                         { 
                                             errors.password ? 
@@ -93,7 +93,7 @@ class Register extends Component {
                                     <div className="form-group col-md-12">
                                         <label htmlFor="confirm_password">Confirm Password</label>
                                         <input required type="password" id="confirm_password" name="confirm_password"
-                                            className={classnames("form-control form-control-md ", {"is-invalid": errors.confirm_password})}
+                                            className={classnames("form-control form-control-md shadow", {"is-invalid": errors.confirm_password})}
                                             value={confirm_password} onChange={this.onChange} />
                                         { 
                                             errors.confirm_password ? 
@@ -101,7 +101,7 @@ class Register extends Component {
                                         }
                                     </div>
 
-                                    <input type="submit" className="btn btn-primary btn-block mt-3"/>
+                                    <input type="submit" className="btn btn-outline-success btn-lg mt-3 mx-auto shadow-lg"/>
 
                                 </div>
                             </form>
