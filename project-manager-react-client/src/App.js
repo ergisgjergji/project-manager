@@ -18,6 +18,33 @@ import ProjectBoard from './components/ProjectBoard/ProjectBoard';
 import AddProjectTask from './components/ProjectBoard/ProjectTasks/AddProjectTask';
 import UpdateProjectTask from './components/ProjectBoard/ProjectTasks/UpdateProjectTask';
 
+import jwt_decode from 'jwt-decode';
+import headersConfig from './redux/securityUtils/headersConfig';
+import { SET_USER } from './redux/actions/types.js';
+
+const checkStorage = () => {
+
+  const token = localStorage.getItem('token');
+  const currentTime = Date.now()/1000;
+
+  if(token) {
+    const decoded = jwt_decode(token);
+
+    if(decoded.exp < currentTime)
+      window.location.href = "/";
+
+    else {
+      headersConfig(token);
+      store.dispatch({
+          type: SET_USER,
+          payload: decoded
+      });
+    }
+  }
+}
+
+checkStorage();
+
 function App() {
   return (
     <Provider store={store}>
