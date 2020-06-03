@@ -27,8 +27,6 @@ const checkStorage = () => {
 
   const token = localStorage.getItem('token');
   const currentTime = Date.now()/1000;
-  console.log("app");
-  
 
   if(token) {
     const decoded = jwt_decode(token);
