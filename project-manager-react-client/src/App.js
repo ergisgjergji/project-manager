@@ -21,18 +21,22 @@ import UpdateProjectTask from './components/ProjectBoard/ProjectTasks/UpdateProj
 import jwt_decode from 'jwt-decode';
 import headersConfig from './redux/securityUtils/headersConfig';
 import { SET_USER } from './redux/actions/types.js';
+import { logout } from './redux/actions/authActions';
 
 const checkStorage = () => {
 
   const token = localStorage.getItem('token');
   const currentTime = Date.now()/1000;
+  console.log("app");
+  
 
   if(token) {
     const decoded = jwt_decode(token);
-
-    if(decoded.exp < currentTime)
+    if(decoded.exp < currentTime) {
+      // handle logout
+      store.dispatch(logout());
       window.location.href = "/";
-
+    }
     else {
       headersConfig(token);
       store.dispatch({

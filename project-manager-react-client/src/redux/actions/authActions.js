@@ -1,8 +1,13 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import { SET_USER, GET_ERRORS, PASSWORD_MISMATCH } from './types';
+import { SET_USER, LOGOUT_USER, GET_ERRORS, PASSWORD_MISMATCH } from './types';
 import { clearErrors } from './errorActions';
 import headersConfig from './../securityUtils/headersConfig';
+
+/* 
+    COMMENT:
+    We handle the request 'Authorization' header in the login/logout actions.
+*/
 
 export const register = (newUser, history) => dispatch => {
 
@@ -53,4 +58,11 @@ export const login = (loginRequest) => dispatch => {
                 payload: err.response.data
             })
         });
+}
+
+export const logout = () => dispatch => {
+    headersConfig(false);
+    dispatch({
+        type: LOGOUT_USER
+    });
 }
