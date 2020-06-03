@@ -21,6 +21,11 @@ class Register extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    componentDidMount() {
+        if(this.props.isAuthenticated)
+            this.props.history.push("/dashboard");
+    }
+
     componentWillReceiveProps (nextProps) {
         if(this.state.errors != nextProps.errorStore)
             this.setState({ errors: nextProps.errorStore });
@@ -116,12 +121,14 @@ class Register extends Component {
 };
 
 Register.propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
     errorStore: PropTypes.object.isRequired,
     register: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
+    isAuthenticated: state.authStore.isAuthenticated,
     errorStore: state.errorStore
 });
 

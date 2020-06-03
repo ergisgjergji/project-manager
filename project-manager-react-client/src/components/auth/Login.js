@@ -19,6 +19,11 @@ class Login extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    componentDidMount() {
+        if(this.props.authStore.isAuthenticated)
+            this.props.history.push("/dashboard");
+    }
+
     componentWillReceiveProps (nextProps) {
         if(this.state.errors != nextProps.errorStore)
             this.setState({ errors: nextProps.errorStore });

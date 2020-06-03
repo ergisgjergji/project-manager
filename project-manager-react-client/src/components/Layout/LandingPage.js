@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class LandingPage extends Component {
+
+    componentDidMount() {
+        if(this.props.isAuthenticated)
+            this.props.history.push("/dashboard");
+    }
+
     render() {
         return (
             <div className="landing">
@@ -30,4 +38,12 @@ class LandingPage extends Component {
     }
 };
 
-export default LandingPage;
+LandingPage.propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired
+};
+
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.authStore.isAuthenticated
+});
+
+export default connect(mapStateToProps)(LandingPage);
