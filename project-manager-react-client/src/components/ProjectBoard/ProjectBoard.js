@@ -40,7 +40,7 @@ class ProjectBoard extends Component {
 
                     return (
                         <div>
-                            <Link to={`/dashboard`} className="btn btn-md btn-secondary my-2"> {`< Back to dashboard`} </Link>
+                            <Link to={`/dashboard`} className="btn btn-sm btn-secondary my-2"> {`< Back to dashboard`} </Link>
                             <hr />
                             <div className="alert alert-danger text-center" role="alert">
                             {errors.code}
@@ -86,7 +86,7 @@ class ProjectBoard extends Component {
 
 ProjectBoard.propTypes = {
     backlogStore: PropTypes.object.isRequired,
-    errorStore: PropTypes.object.isRequired,
+    errorStore: PropTypes.object,
     getBacklog: PropTypes.func.isRequired
 }
 

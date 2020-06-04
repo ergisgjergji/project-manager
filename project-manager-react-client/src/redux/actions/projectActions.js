@@ -18,19 +18,29 @@ export const createOrUpdateProject = (project, history) => dispatch => {
 export const getProjects = () => dispatch => {
 
     axios.get("/api/project/all")
-        .then(res => dispatch({
-            type: GET_PROJECTS,
-            payload: res.data
+        .then(res => {
+            dispatch({
+                type: GET_PROJECTS,
+                payload: res.data
+            })
+            dispatch(clearErrors());
+        })
+        .catch(err => dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
         }));
 };
 
 export const getProject = (code, history) => dispatch => {
 
     axios.get(`/api/project/${code}`)
-        .then(res => dispatch({
-            type: GET_PROJECT,
-            payload: res.data
-        }))
+        .then(res => {
+            dispatch({
+                type: GET_PROJECT,
+                payload: res.data
+            });
+            dispatch(clearErrors());
+        })
         .catch(err => history.push("/dashboard"));
 };
 

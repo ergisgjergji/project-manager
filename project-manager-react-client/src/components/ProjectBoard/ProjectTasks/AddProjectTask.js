@@ -83,7 +83,7 @@ class AddProjectTask extends Component {
                                         <label htmlFor="due_date">Due Date</label>
                                         <input type="date" id="due_date" name="due_date" 
                                             className="form-control form-control-md shadow"
-                                            value={due_date} onChange={this.onChange} />
+                                            onChange={this.onChange} />
                                     </div>
 
                                     <div className="form-group col-md-4">

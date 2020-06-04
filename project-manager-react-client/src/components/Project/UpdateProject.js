@@ -32,9 +32,9 @@ class UpdateProject extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        
-        if(nextProps.errors)
-            this.setState({ errors: nextProps.errors });
+
+        if(nextProps.errorStore)
+            this.setState({ errors: nextProps.errorStore });
 
         const { id, name, code, description, start_date, end_date, created_date } = nextProps.project;
         this.setState({ id, name, code, description, start_date, end_date, created_date });
@@ -133,14 +133,14 @@ class UpdateProject extends Component {
 
 UpdateProject.propTypes = {
     project: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
+    errorStore: PropTypes.object.isRequired,
     getProject: PropTypes.func.isRequired,
     createOrUpdateProject: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
     project: state.projectStore.currentProject,
-    errors: state.errorStore
+    errorStore: state.errorStore
 });
 
 export default connect(mapStateToProps, { getProject, createOrUpdateProject })(UpdateProject);

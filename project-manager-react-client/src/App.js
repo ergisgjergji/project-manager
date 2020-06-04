@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import store from './redux/store';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './css/App.css';
@@ -18,64 +17,41 @@ import ProjectBoard from './components/ProjectBoard/ProjectBoard';
 import AddProjectTask from './components/ProjectBoard/ProjectTasks/AddProjectTask';
 import UpdateProjectTask from './components/ProjectBoard/ProjectTasks/UpdateProjectTask';
 
-import jwt_decode from 'jwt-decode';
-import headersConfig from './redux/securityUtils/headersConfig';
-import { SET_USER } from './redux/actions/types.js';
-import { logout } from './redux/actions/authActions';
-import ProtectedRoute from './components/ProtectedRoute';
+import { loadUser } from './redux/actions/authActions';
+import PublicRoute from './components/PublicRoute';
+import PrivateRoute from './components/PrivateRoute';
 
-const checkStorage = () => {
 
-  const token = localStorage.getItem('token');
-  const currentTime = Date.now()/1000;
-
-  if(token) {
-    const decoded = jwt_decode(token);
-    if(decoded.exp < currentTime) {
-      // handle logout
-      store.dispatch(logout());
-      window.location.href = "/";
-    }
-    else {
-      headersConfig(token);
-      store.dispatch({
-          type: SET_USER,
-          payload: decoded
-      });
-    }
+class App extends Component {
+  componentDidMount() {
+    store.dispatch(loadUser());
   }
-}
 
-checkStorage();
-
-function App() {
-  return (
-    <Provider store={store}>
-      <Router>
-
+  render() {
+    return (
+      <>
         <Header/>
         {
           // PUBLIC Routes
         }
-        <Route exact path="/" component={LandingPage}/>
-        <Route exact path="/register" component={Register}/>
-        <Route exact path="/login" component={Login}/>
+        <PublicRoute exact path="/" component={LandingPage}/>
+        <PublicRoute exact path="/register" component={Register}/>
+        <PublicRoute exact path="/login" component={Login}/>
 
         {
           // PRIVATE Routes
         }
         <Switch>
-          <ProtectedRoute exact path="/dashboard" component={Dashboard}/>
-          <ProtectedRoute exact path="/addProject" component={AddProject}/>
-          <ProtectedRoute exact path="/updateProject/:code" component={UpdateProject}/>
-          <ProtectedRoute exact path="/projectBoard/:code" component={ProjectBoard}/>
-          <ProtectedRoute exact path="/addProjectTask/:code" component={AddProjectTask}/>
-          <ProtectedRoute exact path="/updateProjectTask/:code/:sequence" component={UpdateProjectTask}/>
+          <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+          <PrivateRoute exact path="/addProject" component={AddProject}/>
+          <PrivateRoute exact path="/updateProject/:code" component={UpdateProject}/>
+          <PrivateRoute exact path="/projectBoard/:code" component={ProjectBoard}/>
+          <PrivateRoute exact path="/addProjectTask/:code" component={AddProjectTask}/>
+          <PrivateRoute exact path="/updateProjectTask/:code/:sequence" component={UpdateProjectTask}/>
         </Switch>
-        
-      </Router>
-    </Provider>
-  );
+      </>
+    );
+  }
 }
 
 export default App;

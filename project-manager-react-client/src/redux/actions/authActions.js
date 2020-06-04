@@ -66,3 +66,27 @@ export const logout = () => dispatch => {
         type: LOGOUT_USER
     });
 }
+
+export const loadUser = () => dispatch => {
+
+    const token = localStorage.getItem('token');
+    const currentTime = Date.now()/1000;
+
+    if(token) {
+        
+        const decoded = jwt_decode(token);
+        if(decoded.exp < currentTime) {
+            dispatch({
+                type: LOGOUT_USER
+            });
+            window.location.href = "/";
+        }
+        else {
+            headersConfig(token);
+            dispatch({
+                type: SET_USER,
+                payload: decoded
+            });
+        }
+    }
+}

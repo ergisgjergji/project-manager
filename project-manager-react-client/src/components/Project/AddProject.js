@@ -25,7 +25,7 @@ class AddProject extends Component {
     }
     
     componentWillReceiveProps (nextProps) {
-        if( this.state.errors != nextProps.errorStore)
+        if(this.state.errors != nextProps.errorStore)
             this.setState({ errors: nextProps.errorStore });
     }
 
@@ -62,7 +62,7 @@ class AddProject extends Component {
 
                                         <div className="form-group col-md-12">
                                             <label htmlFor="name">Project Name</label>
-                                            <input type="text" name="name" id="name"
+                                            <input type="text" id="name" name="name"
                                                 className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.name})}
                                                 value={name} onChange={this.onChange} />
                                             { 
@@ -73,7 +73,7 @@ class AddProject extends Component {
 
                                         <div className="form-group col-md-12">
                                             <label htmlFor="code">Project Code</label>
-                                            <input type="text" name="code" id="code"
+                                            <input type="text" id="code" name="code"
                                                 className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.code})}
                                                 value={code} onChange={this.onChange} />
                                             { 
@@ -84,7 +84,7 @@ class AddProject extends Component {
 
                                         <div className="form-group col-md-12">
                                             <label htmlFor="description">Description</label>
-                                            <textarea name="description" id="description" 
+                                            <textarea id="description"  name="description"
                                                 className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.description})}
                                                 value={description} onChange={this.onChange} />
                                             { 
@@ -95,13 +95,15 @@ class AddProject extends Component {
 
                                         <div className="form-group col-md-6">
                                             <label htmlFor="start_date">Start Date</label>
-                                            <input type="date" className="form-control form-control-md shadow " name="start_date" id="start_date" 
+                                            <input type="date" id="start_date" name="start_date"
+                                                className="form-control form-control-md shadow " 
                                                 value={start_date} onChange={this.onChange} />
                                         </div>
 
                                         <div className="form-group col-md-6">
                                             <label htmlFor="end_date">Estimated End Date</label>
-                                            <input type="date" className="form-control form-control-md shadow " name="end_date" id="end_date"
+                                            <input type="date" id="end_date" name="end_date"
+                                                className="form-control form-control-md shadow "
                                                 value={end_date} onChange={this.onChange} />
                                         </div>
 
