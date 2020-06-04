@@ -19,12 +19,12 @@ class Dashboard extends Component {
 			<div className="projects">
 				<div className="container">
 					<div className="row">
-						<div className="col-md-12">
+						<div className="col-md-11 mx-auto">
 							<h1 className="display-4 text-center">Projects</h1>
 							<br />
 							<CreateProjectButton/>
 							<br />
-							<hr />
+							<hr/>
 							{ 
 								projects.map(project => (
 									<ProjectItem key={project.id} project={project}/>

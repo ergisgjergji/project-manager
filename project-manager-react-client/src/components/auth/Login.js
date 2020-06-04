@@ -57,7 +57,7 @@ class Login extends Component {
                 <div className="container">
                     <div className="row">
 
-                        <div className="col-10 col-md-6 m-auto">
+                        <div className="col-10 col-md-8 col-lg-6 m-auto">
 
                             <h1 className="display-4 text-center">Login</h1>
                             <br/>

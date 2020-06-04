@@ -39,9 +39,14 @@ class ProjectBoard extends Component {
                 if(errors.code) {
 
                     return (
-                        <div className="alert alert-danger text-center" role="alert">
+                        <div>
+                            <Link to={`/dashboard`} className="btn btn-md btn-secondary my-2"> {`< Back to dashboard`} </Link>
+                            <hr />
+                            <div className="alert alert-danger text-center" role="alert">
                             {errors.code}
-                        </div>);
+                        </div>
+                        </div>
+                    );
                 }          
                 else {
 
@@ -57,7 +62,13 @@ class ProjectBoard extends Component {
                 }
             }
             else {
-                return <Backlog project_tasks={project_tasks}/>;
+                return (
+                    <div>
+                        <Link to={`/addProjectTask/${code}`} className="btn btn-primary my-2 shadow"> Create Project Task </Link>
+                        <hr/>
+                        <Backlog project_tasks={project_tasks}/>
+                    </div>
+                );
             }
         }
         

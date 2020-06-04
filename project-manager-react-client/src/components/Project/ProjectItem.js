@@ -32,20 +32,20 @@ class ProjectItem extends Component {
 		const { project } = this.props;
 
 		return (
-			<div className="container">
-				<div className="card card-body bg-light mb-3">
+			<div className="container rounded">
+				<div className="card card-body bg-light mb-3 border border-secondary">
 					<div className="row">
-						<div className="col-2">
-							<span className="mx-auto"> {project.code} </span>
+						<div className="col-4 col-md-2">
+							<span className="mx-auto"> #{project.code} </span>
 						</div>
 
-						<div className="col-lg-6 col-md-4 col-8">
+						<div className="col-md-5 col-8">
 							<h3>{project.name}</h3>
 							<p>{project.description}</p>
 						</div>
 
-						<div className="col-md-4 d-none d-lg-block">
-							<ul className="list-group">
+						<div className="col-md-5 d-lg-block">
+							<ul className="list-group shadow-lg">
 
 								<Link to={`/projectBoard/${project.code}`}>
 									<li className="list-group-item board">

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createOrUpdateProject } from './../../redux/actions/projectActions';
@@ -47,8 +48,12 @@ class AddProject extends Component {
                 <div className="project">
                     <div className="container">
                         <div className="row">
-                            <div className="col-10 col-md-8 m-auto">
-
+                            <div className="col-10 col-md-9 col-lg-7 m-auto">
+                            
+                                <Link to="/dashboard" className="btn btn-secondary btn-sm shadow"> 
+                                    {`< Go back`} 
+                                </Link>
+                                
                                 <h5 className="display-4 text-center">New project</h5>
                                 <hr />
 
@@ -58,7 +63,7 @@ class AddProject extends Component {
                                         <div className="form-group col-md-12">
                                             <label htmlFor="name">Project Name</label>
                                             <input type="text" name="name" id="name"
-                                                className={classnames("form-control form-control-md ", {"is-invalid": errors.name})}
+                                                className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.name})}
                                                 value={name} onChange={this.onChange} />
                                             { 
                                                 errors.name ? 
@@ -69,7 +74,7 @@ class AddProject extends Component {
                                         <div className="form-group col-md-12">
                                             <label htmlFor="code">Project Code</label>
                                             <input type="text" name="code" id="code"
-                                                className={classnames("form-control form-control-md ", {"is-invalid": errors.code})}
+                                                className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.code})}
                                                 value={code} onChange={this.onChange} />
                                             { 
                                                 errors.code ? 
@@ -80,7 +85,7 @@ class AddProject extends Component {
                                         <div className="form-group col-md-12">
                                             <label htmlFor="description">Description</label>
                                             <textarea name="description" id="description" 
-                                                className={classnames("form-control form-control-md ", {"is-invalid": errors.description})}
+                                                className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.description})}
                                                 value={description} onChange={this.onChange} />
                                             { 
                                                 errors.description ? 
@@ -90,17 +95,17 @@ class AddProject extends Component {
 
                                         <div className="form-group col-md-6">
                                             <label htmlFor="start_date">Start Date</label>
-                                            <input type="date" className="form-control form-control-md" name="start_date" id="start_date" 
+                                            <input type="date" className="form-control form-control-md shadow " name="start_date" id="start_date" 
                                                 value={start_date} onChange={this.onChange} />
                                         </div>
 
                                         <div className="form-group col-md-6">
                                             <label htmlFor="end_date">Estimated End Date</label>
-                                            <input type="date" className="form-control form-control-md" name="end_date" id="end_date"
+                                            <input type="date" className="form-control form-control-md shadow " name="end_date" id="end_date"
                                                 value={end_date} onChange={this.onChange} />
                                         </div>
 
-                                        <input type="submit" className="btn btn-primary btn-block mt-4"/>
+                                        <input type="submit" className="btn btn-primary btn-lg mt-4 mx-auto shadow-lg"/>
 
                                     </div>
                                 </form>

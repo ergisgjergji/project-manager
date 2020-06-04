@@ -49,7 +49,11 @@ class AddProjectTask extends Component {
             <div className="add-PBI">
                 <div className="container">
                     <div className="row">
-                        <div className="col-10 col-md-8 m-auto">
+                        <div className="col-10 col-md-9 col-lg-7 m-auto">
+
+                            <Link to={`/projectBoard/${code}`} className="btn btn-sm btn-secondary shadow">
+                                {`< Go back`}
+                            </Link>
 
                             <h4 className="display-4 text-center">New Task</h4>
                             <p className="lead text-center">Project: {code}</p>
@@ -60,7 +64,7 @@ class AddProjectTask extends Component {
                                     <div className="form-group col-md-12">
                                         <label htmlFor="summary">Task Summary</label>
                                         <input type="text" id="summary" name="summary"
-                                            className={classnames("form-control form-control-lg ", {"is-invalid": errors.summary})}
+                                            className={classnames("form-control form-control-lg shadow ", {"is-invalid": errors.summary})}
                                             value={summary} onChange={this.onChange} />
                                         { 
                                             errors.summary ? 
@@ -70,21 +74,21 @@ class AddProjectTask extends Component {
 
                                     <div className="form-group col-md-12">
                                         <label htmlFor="acceptance_criteria">Acceptance Criteria</label>
-                                        <textarea id="acceptance_criteria" name="acceptance_criteria"
-                                            className="form-control form-control-lg"
+                                        <textarea id="acceptance_criteria" name="acceptance_criteria" 
+                                            className="form-control form-control-lg shadow"
                                             value={acceptance_criteria} onChange={this.onChange} />
                                     </div>
 
                                     <div className="form-group col-md-4">
                                         <label htmlFor="due_date">Due Date</label>
-                                        <input type="date" id="due_date" name="due_date"
-                                            className="form-control form-control-md"
+                                        <input type="date" id="due_date" name="due_date" 
+                                            className="form-control form-control-md shadow"
                                             value={due_date} onChange={this.onChange} />
                                     </div>
 
                                     <div className="form-group col-md-4">
                                         <label htmlFor="priority">Priority</label>
-                                        <select name="priority" className="form-control form-control-md" value={priority} onChange={this.onChange}>
+                                        <select name="priority" className="form-control form-control-md shadow" value={priority} onChange={this.onChange}>
                                             <option value={0}>Select Priority</option>
                                             <option value={1}>High</option>
                                             <option value={2}>Medium</option>
@@ -94,7 +98,7 @@ class AddProjectTask extends Component {
 
                                     <div className="form-group col-md-4">
                                         <label htmlFor="status">Status</label>
-                                        <select name="status" className="form-control form-control-md" value={status} onChange={this.onChange}>
+                                        <select name="status" className="form-control form-control-md shadow" value={status} onChange={this.onChange}>
                                             <option value="">Select Status</option>
                                             <option value="TO_DO">TO DO</option>
                                             <option value="IN_PROGRESS">IN PROGRESS</option>
@@ -102,11 +106,7 @@ class AddProjectTask extends Component {
                                         </select>
                                     </div>
 
-                                    <Link to={`/projectBoard/${code}`} className="btn btn-md btn-secondary mt-2 mr-2">
-                                        Go back
-                                    </Link>
-
-                                    <input type="submit" className="btn btn-md btn-success mt-2"/>             
+                                    <input type="submit" className="btn btn-lg btn-success mt-4 mx-auto shadow"/>             
                                 
                                 </div>
                             </form>
