@@ -22,6 +22,7 @@ import jwt_decode from 'jwt-decode';
 import headersConfig from './redux/securityUtils/headersConfig';
 import { SET_USER } from './redux/actions/types.js';
 import { logout } from './redux/actions/authActions';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const checkStorage = () => {
 
@@ -51,6 +52,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
+
         <Header/>
         {
           // PUBLIC Routes
@@ -58,15 +60,19 @@ function App() {
         <Route exact path="/" component={LandingPage}/>
         <Route exact path="/register" component={Register}/>
         <Route exact path="/login" component={Login}/>
+
         {
           // PRIVATE Routes
         }
-        <Route exact path="/dashboard" component={Dashboard}/>
-        <Route exact path="/addProject" component={AddProject}/>
-        <Route exact path="/updateProject/:code" component={UpdateProject}/>
-        <Route exact path="/projectBoard/:code" component={ProjectBoard}/>
-        <Route exact path="/addProjectTask/:code" component={AddProjectTask}/>
-        <Route exact path="/updateProjectTask/:code/:sequence" component={UpdateProjectTask}/>
+        <Switch>
+          <ProtectedRoute exact path="/dashboard" component={Dashboard}/>
+          <ProtectedRoute exact path="/addProject" component={AddProject}/>
+          <ProtectedRoute exact path="/updateProject/:code" component={UpdateProject}/>
+          <ProtectedRoute exact path="/projectBoard/:code" component={ProjectBoard}/>
+          <ProtectedRoute exact path="/addProjectTask/:code" component={AddProjectTask}/>
+          <ProtectedRoute exact path="/updateProjectTask/:code/:sequence" component={UpdateProjectTask}/>
+        </Switch>
+        
       </Router>
     </Provider>
   );
