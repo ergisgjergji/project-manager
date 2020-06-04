@@ -37,13 +37,23 @@ class ProjectBoard extends Component {
 
             if(project_tasks.length < 1) {
                 if(errors.code) {
-                    return (<div className="alert alert-danger text-center" role="alert">
-                        {errors.code}
-                    </div>);
-                } else {
-                    return (<div className="alert alert-info text-center" role="alert">
-                        No tasks on this board
-                    </div>);
+
+                    return (
+                        <div className="alert alert-danger text-center" role="alert">
+                            {errors.code}
+                        </div>);
+                }          
+                else {
+
+                    return (
+                        <div>
+                            <Link to={`/addProjectTask/${code}`} className="btn btn-primary my-2"> Create Project Task </Link>
+                            <hr />
+                            <div className="alert alert-info text-center" role="alert">
+                                No tasks on this board
+                            </div>
+                        </div>
+                    );
                 }
             }
             else {
@@ -55,11 +65,6 @@ class ProjectBoard extends Component {
 
         return (
             <div className="container">
-
-                <Link to={`/addProjectTask/${code}`} className="btn btn-primary my-2">
-                    Create Project Task
-                </Link>
-                <hr />
                 {
                     BoardContent
                 }

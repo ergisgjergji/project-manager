@@ -1,5 +1,6 @@
 package com.ergis.projectmanager.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class ProjectTask {
     private String acceptance_criteria;
     private String status;
     private Integer priority;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date due_date;
     private Date created_date;
     private Date updated_date;
