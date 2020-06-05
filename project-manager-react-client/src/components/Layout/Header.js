@@ -68,7 +68,7 @@ class Header extends Component {
         return (
             <Navbar color="primary" dark expand="sm" className="mb-4">
                 <Container>
-                    <Link to="/" class="navbar-brand"> Project Management Tool </Link>
+                    <Link to="/" className="navbar-brand"> Project Management Tool </Link>
                     <NavbarToggler onClick={this.toggle}/>
                     <Collapse isOpen={this.state.isOpen} navbar>
                         {
