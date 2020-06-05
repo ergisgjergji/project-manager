@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Collapse, Navbar, NavbarToggler, Nav, NavItem, Container } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logout } from './../../redux/actions/authActions';
@@ -8,7 +9,16 @@ class Header extends Component {
 
     constructor(){
         super();
+
+        this.state = {
+            isOpen: false
+        };
+        this.toggle = this.toggle.bind(this);
         this.logout = this.logout.bind(this);
+    }
+
+    toggle = () => {
+        this.setState({ isOpen: !this.state.isOpen });
     }
 
     logout = () => {
@@ -21,57 +31,52 @@ class Header extends Component {
         const { user, isAuthenticated } = this.props.authStore;
 
         const logged_in_menu = (
-            <div className="collapse navbar-collapse" id="mobile-nav">
-                <ul className="navbar-nav mr-auto">
-                    <li className="nav-item">
+            <>
+                <Nav className="mr-auto" navbar>
+                    <NavItem>
                         <Link to="/dashboard" className="nav-link">
                             Dashboard
                         </Link>
-                    </li>
-                </ul>
+                    </NavItem>
+                </Nav>
 
-                <ul className="navbar-nav ml-auto">
-                    <li className="nav-item">
+                <Nav className="ml-auto" navbar>
+                    <NavItem>
                         <Link to="/dashboard" className="nav-link">
                             <i className="fa fa-user-circle mr-1"> Welcome, {user.full_name}</i>
                         </Link>
-                    </li>
-                    <li className="nav-item">
+                    </NavItem>
+                    <NavItem>
                         <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
-                    </li>
-                </ul>
-            </div>
+                    </NavItem>
+                </Nav>
+            </>
         );
         const logged_out_menu = (
-            <div className="collapse navbar-collapse" id="mobile-nav">
-                <ul className="navbar-nav mr-auto">
-                </ul>
-
-                <ul className="navbar-nav ml-auto">
-                    <li className="nav-item">
+            <>
+                <Nav className="ml-auto" navbar>
+                    <NavItem>
                         <Link to="/register" className="nav-link"> Sign Up </Link>
-                    </li>
-                    <li className="nav-item">
+                    </NavItem>
+                    <NavItem>
                         <Link to="/login" className="nav-link"> Login </Link>
-                    </li>
-                </ul>
-            </div>
+                    </NavItem>
+                </Nav>
+            </>
         );
 
         return (
-            <nav className="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
-                <div className="container">
-                    <Link to="/" className="navbar-brand"> Project Management Tool </Link>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
-                        <span className="navbar-toggler-icon" />
-                    </button>
-
-                    {
-                        isAuthenticated ? logged_in_menu : logged_out_menu
-                    }
-
-                </div>
-            </nav>
+            <Navbar color="primary" dark expand="sm" className="mb-4">
+                <Container>
+                    <Link to="/" class="navbar-brand"> Project Management Tool </Link>
+                    <NavbarToggler onClick={this.toggle}/>
+                    <Collapse isOpen={this.state.isOpen} navbar>
+                        {
+                            isAuthenticated ? logged_in_menu : logged_out_menu
+                        }
+                    </Collapse>
+                </Container>
+            </Navbar>
         )
     }
 };
