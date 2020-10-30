@@ -3,6 +3,7 @@ import jwt_decode from 'jwt-decode';
 import { SET_USER, LOGOUT_USER, GET_ERRORS, PASSWORD_MISMATCH } from './types';
 import { clearErrors } from './errorActions';
 import headersConfig from './../securityUtils/headersConfig';
+import { toast } from 'react-toastify';
 
 /* 
     COMMENT:
@@ -25,6 +26,7 @@ export const register = (newUser, history) => dispatch => {
         .then(res =>{
             history.push("/login");
             dispatch(clearErrors());
+            toast.info('ℹ Account was registered successfully.');
         })
         .catch(err => dispatch({
             type: GET_ERRORS,

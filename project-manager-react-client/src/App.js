@@ -6,6 +6,8 @@ import './css/App.css';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import './css/react-confirm-alert.css';
 
+import { ToastContainer } from 'react-toastify';
+
 import Header from './components/Layout/Header';
 import LandingPage from './components/Layout/LandingPage';
 import Register from './components/auth/Register';
@@ -49,6 +51,18 @@ class App extends Component {
           <PrivateRoute exact path="/addProjectTask/:code" component={AddProjectTask}/>
           <PrivateRoute exact path="/updateProjectTask/:code/:sequence" component={UpdateProjectTask}/>
         </Switch>
+
+        <ToastContainer
+          position="bottom-right"
+          autoClose={4000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable
+          pauseOnHover={false}
+        />
       </>
     );
   }

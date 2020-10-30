@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { GET_ERRORS, GET_BACKLOG, GET_PROJECT_TASK, DELETE_PROJECT_TASK } from './types';
 import { clearErrors } from './errorActions';
+import { toast } from 'react-toastify';
 
 export const createProjectTask = (code, project_task, history) => dispatch => {
 
@@ -8,6 +9,7 @@ export const createProjectTask = (code, project_task, history) => dispatch => {
         .then(res => {
             history.push(`/projectBoard/${code}`);
             dispatch(clearErrors());
+            toast.success('✔ Task was created successfully.');
         })
         .catch(err => dispatch({
             type: GET_ERRORS,
@@ -50,6 +52,7 @@ export const updateProjectTask = (code, sequence, project_task, history) => disp
         .then(res => {
             history.push(`/projectBoard/${code}`);
             dispatch(clearErrors());
+            toast.info('ℹ Task was updated successfully.');
         })
         .catch(err => dispatch({
             type: GET_ERRORS,
@@ -60,10 +63,13 @@ export const updateProjectTask = (code, sequence, project_task, history) => disp
 export const deleteProjectTask = (code, sequence) => dispatch => {
 
     axios.delete(`/api/backlog/${code}/${sequence}`)
-        .then(res => dispatch({
-            type: DELETE_PROJECT_TASK,
-            payload: sequence
-        }))
+        .then(res => {
+            dispatch({
+                type: DELETE_PROJECT_TASK,
+                payload: sequence
+            });
+            toast.info('ℹ Task was deleted successfully.');
+        })
         .catch(err => dispatch({
             type: GET_ERRORS,
             payload: err.response.data
