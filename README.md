@@ -8,4 +8,4 @@ The architecture consists of 2 parts:
 
 Security: JWT Token
 
-A running demo is illustrated in this link: https://ergis-project-manager.herokuapp.com/
+A running demo is illustrated in this link: https://ergis-project-manager.herokuapp.com/ (it might take some seconds to load in the first try due to Heroku)
